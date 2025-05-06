@@ -50,6 +50,14 @@ def predict():
     elif task == "amazon_sentiment":
         prediction = {0: "Neutral", 1: "Negative", 2: "Positive"}.get(prediction, prediction)
 
+    elif task == "news_category":
+        prediction = {
+            1: "Social Issues / Politics",
+            2: "Sports",
+            3: "Finance / Economy",
+            4: "Science & Technology"
+        }.get(prediction, prediction)
+
     return jsonify({"result": str(prediction)})
 
 
