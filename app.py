@@ -40,10 +40,14 @@ def predict():
     vect_text = vectorizer.transform([text])
     prediction = model.predict(vect_text)[0]
 
-    # Map prediction to human-readable labels for specific tasks
+    # Post-prediction mapping
     if task == "sms_spam":
         label_map_sms = {0: "Not Spam", 1: "Spam"}
         prediction = label_map_sms.get(prediction, prediction)
+
+    elif task == "fake_news":
+        label_map_fake = {0: "Real", 1: "Fake"}
+        prediction = label_map_fake.get(prediction, prediction)
 
     return jsonify({"result": str(prediction)})
 
