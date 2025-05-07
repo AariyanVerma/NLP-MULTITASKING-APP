@@ -52,7 +52,7 @@ def predict():
         label_map_fake = {
             0: "Real", 1: "Fake",
             "0": "Real", "1": "Fake"
-        }
+        } 
         prediction = label_map_fake.get(prediction, prediction)
 
     elif task == "amazon_sentiment":
