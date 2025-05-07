@@ -40,43 +40,42 @@ def predict():
     vect_text = vectorizer.transform([text])
     prediction = model.predict(vect_text)[0]
 
-    # Post-process label mapping
+    # 🆕 Post-process label mapping
     if task == "sms_spam":
         label_map_sms = {
-            0: "Not Spam", 1: "Spam",
-            "0": "Not Spam", "1": "Spam"
+            0: "Not Spam", 1: "Spam",     # 🆕 Handles int output
+            "0": "Not Spam", "1": "Spam"  # 🆕 Handles str output
         }
-        prediction = label_map_sms.get(prediction, prediction)
+        prediction = label_map_sms.get(prediction, prediction)  # 🆕
 
     elif task == "fake_news":
         label_map_fake = {
-            0: "Real", 1: "Fake",
-            "0": "Real", "1": "Fake"
-        } 
-        prediction = label_map_fake.get(prediction, prediction)
+            0: "Real", 1: "Fake",         # 🆕
+            "0": "Real", "1": "Fake"      # 🆕
+        }
+        prediction = label_map_fake.get(prediction, prediction)  # 🆕
 
     elif task == "amazon_sentiment":
         label_map_amazon = {
-            0: "Neutral", 1: "Negative", 2: "Positive",
-            "0": "Neutral", "1": "Negative", "2": "Positive"
+            0: "Neutral", 1: "Negative", 2: "Positive",     # 🆕
+            "0": "Neutral", "1": "Negative", "2": "Positive" # 🆕
         }
-        prediction = label_map_amazon.get(prediction, prediction)
+        prediction = label_map_amazon.get(prediction, prediction)  # 🆕
 
     elif task == "news_category":
         label_map_news = {
             1: "Social Issues / Politics",
             2: "Sports",
             3: "Finance / Economy",
-            4: "Science & Technology",
+            4: "Science & Technology",   # 🆕 All below are mappings
             "1": "Social Issues / Politics",
             "2": "Sports",
             "3": "Finance / Economy",
             "4": "Science & Technology"
         }
-        prediction = label_map_news.get(prediction, prediction)
+        prediction = label_map_news.get(prediction, prediction)  # 🆕
 
     return jsonify({"result": str(prediction)})
-
 
 if __name__ == "__main__":
     app.run(debug=True)
